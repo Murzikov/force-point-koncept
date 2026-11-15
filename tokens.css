@@ -1,0 +1,45 @@
+/* Токены направления «Нарисованный участок». Все стили концепта берут значения отсюда. */
+@font-face { font-family: "Unbounded"; src: url("fonts/unbounded-cyrillic-wght-normal.woff2") format("woff2"); font-weight: 200 900; font-display: swap; unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: "Unbounded"; src: url("fonts/unbounded-latin-wght-normal.woff2") format("woff2"); font-weight: 200 900; font-display: swap; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2212; }
+@font-face { font-family: "Onest"; src: url("fonts/onest-cyrillic-wght-normal.woff2") format("woff2"); font-weight: 100 900; font-display: swap; unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: "Onest"; src: url("fonts/onest-latin-wght-normal.woff2") format("woff2"); font-weight: 100 900; font-display: swap; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2212; }
+
+:root {
+  --paper: #f4f3ee;
+  --paper-light: #fbfaf6;
+  --ink: #15161a;
+  --ink-2: #4a4c53;
+  --ink-soft: #83867e;
+  --green: #2f6b3f;
+  --green-hover: #24522f;
+  --green-pale: #e4ece3;
+  --green-pale-strong: #d9e6d8;
+  --white: #fff;
+  --leaf: #72ab75;
+  --leaf-light: #a9d0ab;
+  --red: #de3b30;
+
+  --font-display: "Unbounded", "Segoe UI", sans-serif;
+  --font-text: "Onest", "Segoe UI", sans-serif;
+
+  --fs-giant: clamp(4.2rem, min(1rem + 15vw, 26vh), 17rem);
+  --fs-h2: clamp(2.2rem, 1.2rem + 3.6vw, 4.6rem);
+  --fs-h3: clamp(1.25rem, 1.1rem + 0.5vw, 1.6rem);
+  --fs-lead: clamp(1.1rem, 1rem + 0.4vw, 1.35rem);
+  --fs-body: clamp(1rem, 0.96rem + 0.2vw, 1.1rem);
+  --fs-small: 0.9rem;
+
+  --wrap: 1320px;
+  --gutter: clamp(1rem, 5vw, 4.5rem);
+  --space: clamp(3.5rem, 2rem + 4.5vw, 6.5rem);   /* между секциями, одно на всю страницу */
+  --space-in: clamp(1.5rem, 1rem + 2vw, 3rem);    /* от заголовка до содержимого и между рядами */
+  --wave-h: clamp(32px, 4.5vw, 72px);
+
+  --line: 1.6px;
+  --blob: 46% 54% 49% 51% / 62% 44% 56% 38%;
+  --corner: 8px;
+  --corner-big: clamp(36px, 5vw, 70px);
+  --soft-radius: 22px;
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --soft: 0.6s var(--ease);
+}

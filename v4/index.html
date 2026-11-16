@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Вариант 4. Обложка – Force Point</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="../assets/img/favicon.ico?v=ee35d3ab95">
+<link rel="preload" href="../fonts/unbounded-cyrillic-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../tokens.css?v=929bfe4e19">
+<style>
+*, *::before, *::after { box-sizing: border-box; }
+html { overflow-x: clip; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 400 var(--fs-body)/1.6 var(--font-text); overflow-x: clip; }
+img { display: block; max-width: 100%; }
+h1, h2, h3, p, figure { margin: 0; font-weight: 400; }
+a { color: inherit; text-decoration: none; }
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); }
+.head { display: flex; align-items: center; gap: 2rem; padding: 1.2rem var(--gutter); position: relative; z-index: 20; }
+.head .brand img { width: 2.8rem; height: auto; }
+.head nav { display: flex; gap: 1.6rem; margin-left: auto; font-size: 0.95rem; }
+.btn { position: relative; display: inline-flex; align-items: center; justify-content: center; min-height: 3.2rem; padding: 0.9rem 1.9rem; border-radius: var(--blob); background: var(--green); color: #fff; font: 500 1rem/1.2 var(--font-text); transition: box-shadow .2s; }
+.btn::after { content: ""; position: absolute; top: .1rem; right: .55rem; width: .62rem; height: .62rem; border-radius: 50%; background: var(--red); }
+.btn:active { box-shadow: inset 0 3px 10px rgb(10 26 15 / 50%); }
+.btn--light { background: var(--paper-light); color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--ink-soft); }
+.btn--light::after { display: none; }
+.btn--small { min-height: 2.6rem; padding: .55rem 1.2rem; font-size: .9rem; }
+.price { color: var(--green); font-weight: 600; }
+/* объект выходит из рамки: кадр режется фигурой, поверх тот же кадр, где оставлен только объект */
+.pop { position: relative; aspect-ratio: var(--ar); isolation: isolate; }
+.pop-shape { position: absolute; inset: 0; clip-path: var(--shape); }
+.pop-shape img, .pop-cut { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.pop-cut { z-index: 2; pointer-events: none; filter: drop-shadow(0 18px 18px rgb(24 36 26 / 22%)); }
+@media (max-width: 900px) { .head nav { display: none; } .head .btn { margin-left: auto; } }
+
+/* Обложка: кадр на всю ширину, название стоит между небом и башней, башня закрывает буквы.
+   Ниже направления крупными разворотами, объект в каждом выходит над рамкой. */
+.head { position: absolute; inset: 0 0 auto; }
+.cover { position: relative; height: min(94svh, 64vw); min-height: 520px; overflow: hidden; isolation: isolate; }
+.cover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 0%; }
+.cover .word { position: absolute; z-index: 1; left: var(--gutter); top: 15%; font: 200 clamp(4rem, 14.5vw, 16rem)/.8 var(--font-display); letter-spacing: -.055em; color: var(--ink); }
+.cover .word span:not(.o) { display: block; }
+.cover .word .o { color: var(--red); }
+.cover .cut { z-index: 2; filter: drop-shadow(0 20px 20px rgb(24 36 26 / 25%)); }
+.intro { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(2rem, 5vw, 5rem); align-items: end; padding-top: clamp(2rem, 4vw, 3.5rem); }
+.intro h1 { font: 300 clamp(1.8rem, 1.2rem + 2vw, 3.1rem)/1.12 var(--font-display); letter-spacing: -.03em; }
+.intro h1 b { font-weight: 300; color: var(--green); }
+.intro p { color: var(--ink-2); font-size: var(--fs-lead); line-height: 1.5; }
+.intro .actions { display: flex; flex-wrap: wrap; gap: .9rem; margin-top: 1.4rem; }
+.build { padding: var(--space) 0; }
+.row { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(2rem, 5vw, 5rem); align-items: end; }
+.row + .row { margin-top: clamp(3rem, 7vw, 7rem); }
+.row:nth-child(even) { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
+.row:nth-child(even) .pop { order: 2; }
+.row h2 { font: 250 clamp(2rem, 1.2rem + 2.6vw, 3.6rem)/1 var(--font-display); letter-spacing: -.035em; }
+.row p { margin-top: 1rem; color: var(--ink-2); max-width: 28rem; }
+.row .price { display: block; margin-top: .8rem; }
+.row .btn { margin-top: 1.4rem; }
+.r-pine { --ar: 3685 / 3536; --shape: inset(31% 20% 3% 6% round 8px); }
+.r-tower { --ar: 3 / 2; --shape: inset(34% 2% 0 2% round 8px); }
+.r-lounge { --ar: 1150 / 1039; --shape: inset(26% 4% 0 4% round 8px); }
+.r-canopy { --ar: 1444 / 861; --shape: inset(37% 1% 0 2% round 8px); }
+@media (max-width: 860px) {
+  .cover { height: 78svh; }
+  .cover img { object-position: 28% 0%; }
+  .cover .word { top: 14%; font-size: 24vw; }
+  .intro, .row, .row:nth-child(even) { grid-template-columns: 1fr; }
+  .row:nth-child(even) .pop { order: 0; }
+}
+
+</style>
+</head>
+<body>
+<header class="head">
+  <a class="brand" href="../" aria-label="Force Point"><img src="../assets/img/logo-dark-240.webp?v=c1f12a60f7" width="240" height="271" alt=""></a>
+  <nav aria-label="Основное меню"><a href="#build">что строим</a><a href="#build">работы</a><a href="#build">цены</a><a href="#build">контакты</a></nav>
+  <a class="btn btn--small" href="#build">рассчитать стоимость</a>
+</header>
+
+<section class="cover" aria-label="Force Point">
+  <img src="../img/pop/tower-1200.webp?v=9f5b373edf" width="1200" height="800" alt="Деревянная башня с горкой, скалодромом и сеткой на фоне летнего неба" fetchpriority="high">
+  <p class="word" aria-hidden="true"><span>force</span><span>p<span class="o">o</span>int</span></p>
+  <img class="cut" src="../img/pop/tower-cut-1200.webp?v=272f711679" width="1200" height="800" alt="" aria-hidden="true" fetchpriority="high">
+</section>
+<main class="wrap">
+  <section class="intro">
+    <h1>дома на деревьях, <b>детские площадки</b> и места для отдыха на вашем участке</h1>
+    <div>
+      <p>Каждый объект рисуем под участок и собираем своей бригадой. Москва, область и вся Россия.</p>
+      <div class="actions"><a class="btn" href="#build">рассчитать стоимость</a><a class="btn btn--light" href="#build">посмотреть работы</a></div>
+    </div>
+  </section>
+  <section class="build" id="build">
+    <article class="row"><div class="pop r-pine">
+<div class="pop-shape"><img src="../img/pop/pine-1200.webp?v=fd95b093e8" srcset="../img/pop/pine-640.webp?v=942b3dab69 640w, ../img/pop/pine-1200.webp?v=fd95b093e8 1200w" sizes="(max-width: 860px) 92vw, 720px" width="1200" height="1151" alt="Дом на дереве на стальных опорах в сосновом лесу" loading="lazy"></div>
+<img class="pop-cut" src="../img/pop/pine-cut-1200.webp?v=dfe029a0f3" srcset="../img/pop/pine-cut-640.webp?v=f5804e5b0f 640w, ../img/pop/pine-cut-1200.webp?v=dfe029a0f3 1200w" sizes="(max-width: 860px) 92vw, 720px" width="1200" height="1151" alt="" aria-hidden="true" loading="lazy">
+
+</div><div><h2>дома на деревьях</h2><p>Для игр, ночёвок и вечеров всей семьёй: детский, семейный или гостевой.</p><span class="price">от 1,5 млн ₽*</span><a class="btn btn--light" href="#build">смотреть дома</a></div></article>
+    <article class="row"><div class="pop r-tower">
+<div class="pop-shape"><img src="../img/pop/tower-1200.webp?v=9f5b373edf" srcset="../img/pop/tower-640.webp?v=e5bf7ed9df 640w, ../img/pop/tower-1200.webp?v=9f5b373edf 1200w" sizes="(max-width: 860px) 92vw, 720px" width="1200" height="800" alt="Башня с горкой и скалодромом" loading="lazy"></div>
+<img class="pop-cut" src="../img/pop/tower-cut-1200.webp?v=272f711679" srcset="../img/pop/tower-cut-640.webp?v=d4db735b10 640w, ../img/pop/tower-cut-1200.webp?v=272f711679 1200w" sizes="(max-width: 860px) 92vw, 720px" width="1200" height="800" alt="" aria-hidden="true" loading="lazy">
+
+</div><div><h2>детские площадки</h2><p>Башни, горки, скалодромы и сетки. Готовый комплекс или свой проект под двор.</p><span class="price">готовые от 63 000 ₽*</span><a class="btn btn--light" href="#build">смотреть площадки</a></div></article>
+    <article class="row"><div class="pop r-lounge">
+<div class="pop-shape"><img src="../img/pop/lounge-1200.webp?v=35604b1f19" srcset="../img/pop/lounge-640.webp?v=a756a510f2 640w, ../img/pop/lounge-1200.webp?v=35604b1f19 1200w" sizes="(max-width: 860px) 92vw, 720px" width="1200" height="1084" alt="Вечерняя зона отдыха с навесом-шалашом и очагом" loading="lazy"></div>
+<img class="pop-cut" src="../img/pop/lounge-cut-1200.webp?v=0dac699942" srcset="../img/pop/lounge-cut-640.webp?v=8b97aae8d5 640w, ../img/pop/lounge-cut-1200.webp?v=0dac699942 1200w" sizes="(max-width: 860px) 92vw, 720px" width="1200" height="1084" alt="" aria-hidden="true" loading="lazy">
+
+</div><div><h2>отдых на участке</h2><p>Беседки, качели, зона у очага, навес для машины с местом для семьи.</p><span class="price">скамьи и столы от 60 000 ₽*</span><a class="btn btn--light" href="#build">смотреть идеи</a></div></article>
+    <article class="row"><div class="pop r-canopy">
+<div class="pop-shape"><img src="../img/pop/canopy-1200.webp?v=cead79ba4e" srcset="../img/pop/canopy-640.webp?v=a4f1229f09 640w, ../img/pop/canopy-1200.webp?v=cead79ba4e 1200w" sizes="(max-width: 860px) 92vw, 720px" width="1200" height="716" alt="Входная группа парка с деревянным навесом" loading="lazy"></div>
+<img class="pop-cut" src="../img/pop/canopy-cut-1200.webp?v=304e7f9250" srcset="../img/pop/canopy-cut-640.webp?v=be86781c4c 640w, ../img/pop/canopy-cut-1200.webp?v=304e7f9250 1200w" sizes="(max-width: 860px) 92vw, 720px" width="1200" height="716" alt="" aria-hidden="true" loading="lazy">
+
+</div><div><h2>для бизнеса</h2><p>Входные группы, игровые корабли и верёвочные парки для отелей, посёлков, ресторанов.</p><span class="price">тематическая зона от 2,5 млн ₽*</span><a class="btn btn--light" href="#build">смотреть работы</a></div></article>
+  </section>
+</main>
+
+
+</body>
+</html>

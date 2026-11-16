@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Вариант 1. Галерея – Force Point</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="../assets/img/favicon.ico?v=ee35d3ab95">
+<link rel="preload" href="../fonts/unbounded-cyrillic-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../tokens.css?v=929bfe4e19">
+<style>
+*, *::before, *::after { box-sizing: border-box; }
+html { overflow-x: clip; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 400 var(--fs-body)/1.6 var(--font-text); overflow-x: clip; }
+img { display: block; max-width: 100%; }
+h1, h2, h3, p, figure { margin: 0; font-weight: 400; }
+a { color: inherit; text-decoration: none; }
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); }
+.head { display: flex; align-items: center; gap: 2rem; padding: 1.2rem var(--gutter); position: relative; z-index: 20; }
+.head .brand img { width: 2.8rem; height: auto; }
+.head nav { display: flex; gap: 1.6rem; margin-left: auto; font-size: 0.95rem; }
+.btn { position: relative; display: inline-flex; align-items: center; justify-content: center; min-height: 3.2rem; padding: 0.9rem 1.9rem; border-radius: var(--blob); background: var(--green); color: #fff; font: 500 1rem/1.2 var(--font-text); transition: box-shadow .2s; }
+.btn::after { content: ""; position: absolute; top: .1rem; right: .55rem; width: .62rem; height: .62rem; border-radius: 50%; background: var(--red); }
+.btn:active { box-shadow: inset 0 3px 10px rgb(10 26 15 / 50%); }
+.btn--light { background: var(--paper-light); color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--ink-soft); }
+.btn--light::after { display: none; }
+.btn--small { min-height: 2.6rem; padding: .55rem 1.2rem; font-size: .9rem; }
+.price { color: var(--green); font-weight: 600; }
+/* объект выходит из рамки: кадр режется фигурой, поверх тот же кадр, где оставлен только объект */
+.pop { position: relative; aspect-ratio: var(--ar); isolation: isolate; }
+.pop-shape { position: absolute; inset: 0; clip-path: var(--shape); }
+.pop-shape img, .pop-cut { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.pop-cut { z-index: 2; pointer-events: none; filter: drop-shadow(0 18px 18px rgb(24 36 26 / 22%)); }
+@media (max-width: 900px) { .head nav { display: none; } .head .btn { margin-left: auto; } }
+
+/* Галерея: тихая бумага, ровные прямоугольники, объект вылетает над рамкой и заходит на заголовок */
+.hero { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(2rem, 5vw, 6rem); align-items: end; padding-top: clamp(1rem, 3vw, 3rem); }
+.hero h1 { font: 250 clamp(2.6rem, 1.4rem + 4.2vw, 5.6rem)/0.98 var(--font-display); letter-spacing: -0.04em; }
+.hero h1 span { display: block; color: var(--ink-soft); }
+.hero h1 span + span { color: var(--green); padding-left: 0.9em; }
+.hero p { margin-top: 1.6rem; max-width: 30rem; color: var(--ink-2); font-size: var(--fs-lead); line-height: 1.5; }
+.hero .actions { display: flex; flex-wrap: wrap; gap: .9rem; margin-top: 2rem; }
+.hero-pop { --ar: 1 / 1; --shape: inset(33% 3% 0 9% round 10px); margin-top: -10%; }
+.hero-note { margin-top: .8rem; padding-left: 9%; color: var(--ink-2); font-size: var(--fs-small); }
+.line { height: 1px; background: rgb(21 22 26 / 12%); margin: var(--space) 0 0; }
+.build { padding-top: var(--space); }
+.build h2 { font: 250 var(--fs-h2)/1 var(--font-display); letter-spacing: -0.03em; color: var(--ink-soft); }
+.build h2 b { font-weight: 250; color: var(--green); }
+.grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(2.5rem, 5vw, 5rem) clamp(1.5rem, 4vw, 4rem); margin-top: var(--space-in); }
+.card h3 { margin-top: 1.1rem; font: 300 var(--fs-h3)/1.15 var(--font-display); letter-spacing: -.02em; }
+.card p { margin-top: .4rem; color: var(--ink-2); max-width: 30rem; }
+.card .price { display: block; margin-top: .5rem; }
+.card .pop { transition: transform .6s var(--ease); }
+.card:hover .pop { transform: translateY(-6px); }
+.c-pine { --ar: 3685 / 3536; --shape: inset(31% 22% 3% 6% round 10px); }
+.c-tower { --ar: 3 / 2; --shape: inset(36% 2% 0 2% round 10px); }
+.c-lounge { --ar: 1150 / 1039; --shape: inset(27% 4% 0 4% round 10px); }
+.c-canopy { --ar: 1444 / 861; --shape: inset(38% 1% 0 2% round 10px); }
+.grid .card:nth-child(even) { margin-top: 12%; }
+@media (max-width: 860px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-pop { margin-top: 0; }
+  .grid { grid-template-columns: 1fr; }
+  .grid .card:nth-child(even) { margin-top: 0; }
+}
+
+</style>
+</head>
+<body>
+<header class="head">
+  <a class="brand" href="../" aria-label="Force Point"><img src="../assets/img/logo-dark-240.webp?v=c1f12a60f7" width="240" height="271" alt=""></a>
+  <nav aria-label="Основное меню"><a href="#build">что строим</a><a href="#build">работы</a><a href="#build">цены</a><a href="#build">контакты</a></nav>
+  <a class="btn btn--small" href="#build">рассчитать стоимость</a>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <div>
+      <h1><span>дома</span> <span>на деревьях</span></h1>
+      <p>И детские площадки, и места для отдыха на вашем участке. Каждый объект рисуем под участок и собираем своей бригадой.</p>
+      <div class="actions"><a class="btn" href="#build">рассчитать стоимость</a><a class="btn btn--light" href="#build">посмотреть работы</a></div>
+    </div>
+    <figure>
+      <div class="pop hero-pop">
+<div class="pop-shape"><img src="../img/pop/tall-1200.webp?v=ecd16b6f24" srcset="../img/pop/tall-640.webp?v=1d56a792fd 640w, ../img/pop/tall-1200.webp?v=ecd16b6f24 1200w" sizes="(max-width: 860px) 92vw, 640px" width="1200" height="1200" alt="Дом на дереве с панорамным окном и лестницей, вид снизу на фоне неба" fetchpriority="high"></div>
+<img class="pop-cut" src="../img/pop/tall-cut-1200.webp?v=58cfedeafc" srcset="../img/pop/tall-cut-640.webp?v=385f4dd05f 640w, ../img/pop/tall-cut-1200.webp?v=58cfedeafc 1200w" sizes="(max-width: 860px) 92vw, 640px" width="1200" height="1200" alt="" aria-hidden="true" fetchpriority="high">
+
+</div>
+      <figcaption class="hero-note">Дом с панорамным окном <span class="price">похожий – от 3 млн ₽*</span></figcaption>
+    </figure>
+  </section>
+  <div class="line"></div>
+  <section class="build" id="build">
+    <h2>что построим <b>у вас</b></h2>
+    <div class="grid">
+      <a class="card" href="#build"><div class="pop c-pine">
+<div class="pop-shape"><img src="../img/pop/pine-1200.webp?v=fd95b093e8" srcset="../img/pop/pine-640.webp?v=942b3dab69 640w, ../img/pop/pine-1200.webp?v=fd95b093e8 1200w" sizes="(max-width: 860px) 92vw, 600px" width="1200" height="1151" alt="Дом на дереве на стальных опорах в сосновом лесу" loading="lazy"></div>
+<img class="pop-cut" src="../img/pop/pine-cut-1200.webp?v=dfe029a0f3" srcset="../img/pop/pine-cut-640.webp?v=f5804e5b0f 640w, ../img/pop/pine-cut-1200.webp?v=dfe029a0f3 1200w" sizes="(max-width: 860px) 92vw, 600px" width="1200" height="1151" alt="" aria-hidden="true" loading="lazy">
+
+</div><h3>дома на деревьях</h3><p>Для игр, ночёвок и вечеров всей семьёй.</p><span class="price">от 1,5 млн ₽*</span></a>
+      <a class="card" href="#build"><div class="pop c-tower">
+<div class="pop-shape"><img src="../img/pop/tower-1200.webp?v=9f5b373edf" srcset="../img/pop/tower-640.webp?v=e5bf7ed9df 640w, ../img/pop/tower-1200.webp?v=9f5b373edf 1200w" sizes="(max-width: 860px) 92vw, 600px" width="1200" height="800" alt="Башня с горкой, скалодромом и сеткой на фоне неба" loading="lazy"></div>
+<img class="pop-cut" src="../img/pop/tower-cut-1200.webp?v=272f711679" srcset="../img/pop/tower-cut-640.webp?v=d4db735b10 640w, ../img/pop/tower-cut-1200.webp?v=272f711679 1200w" sizes="(max-width: 860px) 92vw, 600px" width="1200" height="800" alt="" aria-hidden="true" loading="lazy">
+
+</div><h3>детские площадки</h3><p>Башни, горки, скалодромы и сетки.</p><span class="price">готовые от 63 000 ₽*</span></a>
+      <a class="card" href="#build"><div class="pop c-lounge">
+<div class="pop-shape"><img src="../img/pop/lounge-1200.webp?v=35604b1f19" srcset="../img/pop/lounge-640.webp?v=a756a510f2 640w, ../img/pop/lounge-1200.webp?v=35604b1f19 1200w" sizes="(max-width: 860px) 92vw, 600px" width="1200" height="1084" alt="Вечерняя зона отдыха с навесом-шалашом и очагом" loading="lazy"></div>
+<img class="pop-cut" src="../img/pop/lounge-cut-1200.webp?v=0dac699942" srcset="../img/pop/lounge-cut-640.webp?v=8b97aae8d5 640w, ../img/pop/lounge-cut-1200.webp?v=0dac699942 1200w" sizes="(max-width: 860px) 92vw, 600px" width="1200" height="1084" alt="" aria-hidden="true" loading="lazy">
+
+</div><h3>отдых на участке</h3><p>Беседки, качели, зона у очага.</p><span class="price">скамьи и столы от 60 000 ₽*</span></a>
+      <a class="card" href="#build"><div class="pop c-canopy">
+<div class="pop-shape"><img src="../img/pop/canopy-1200.webp?v=cead79ba4e" srcset="../img/pop/canopy-640.webp?v=a4f1229f09 640w, ../img/pop/canopy-1200.webp?v=cead79ba4e 1200w" sizes="(max-width: 860px) 92vw, 600px" width="1200" height="716" alt="Входная группа парка с деревянным навесом" loading="lazy"></div>
+<img class="pop-cut" src="../img/pop/canopy-cut-1200.webp?v=304e7f9250" srcset="../img/pop/canopy-cut-640.webp?v=be86781c4c 640w, ../img/pop/canopy-cut-1200.webp?v=304e7f9250 1200w" sizes="(max-width: 860px) 92vw, 600px" width="1200" height="716" alt="" aria-hidden="true" loading="lazy">
+
+</div><h3>для бизнеса</h3><p>Входные группы, игровые корабли, верёвочные парки.</p><span class="price">тематическая зона от 2,5 млн ₽*</span></a>
+    </div>
+  </section>
+  <div style="height: var(--space)"></div>
+</main>
+
+
+</body>
+</html>

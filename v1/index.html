@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Вариант 1. Галерея – Force Point</title>
+<title>Дома на деревьях и детские площадки – Force Point</title>
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" href="../assets/img/favicon.ico?v=ee35d3ab95">
 <link rel="preload" href="../fonts/unbounded-cyrillic-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -33,91 +33,258 @@ a { color: inherit; text-decoration: none; }
 .pop-cut { z-index: 2; pointer-events: none; filter: drop-shadow(0 18px 18px rgb(24 36 26 / 22%)); }
 @media (max-width: 900px) { .head nav { display: none; } .head .btn { margin-left: auto; } }
 
-/* Галерея: тихая бумага, ровные прямоугольники, объект вылетает над рамкой и заходит на заголовок */
-.hero { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(2rem, 5vw, 6rem); align-items: end; padding-top: clamp(1rem, 3vw, 3rem); }
-.hero h1 { font: 250 clamp(2.6rem, 1.4rem + 4.2vw, 5.6rem)/0.98 var(--font-display); letter-spacing: -0.04em; }
-.hero h1 span { display: block; color: var(--ink-soft); }
-.hero h1 span + span { color: var(--green); padding-left: 0.9em; }
-.hero p { margin-top: 1.6rem; max-width: 30rem; color: var(--ink-2); font-size: var(--fs-lead); line-height: 1.5; }
-.hero .actions { display: flex; flex-wrap: wrap; gap: .9rem; margin-top: 2rem; }
-.hero-pop { --ar: 1 / 1; --shape: inset(33% 3% 0 9% round 10px); margin-top: -10%; }
-.hero-note { margin-top: .8rem; padding-left: 9%; color: var(--ink-2); font-size: var(--fs-small); }
-.line { height: 1px; background: rgb(21 22 26 / 12%); margin: var(--space) 0 0; }
-.build { padding-top: var(--space); }
-.build h2 { font: 250 var(--fs-h2)/1 var(--font-display); letter-spacing: -0.03em; color: var(--ink-soft); }
-.build h2 b { font-weight: 250; color: var(--green); }
-.grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(2.5rem, 5vw, 5rem) clamp(1.5rem, 4vw, 4rem); margin-top: var(--space-in); }
-.card h3 { margin-top: 1.1rem; font: 300 var(--fs-h3)/1.15 var(--font-display); letter-spacing: -.02em; }
-.card p { margin-top: .4rem; color: var(--ink-2); max-width: 30rem; }
-.card .price { display: block; margin-top: .5rem; }
-.card .pop { transition: transform .6s var(--ease); }
-.card:hover .pop { transform: translateY(-6px); }
-.c-pine { --ar: 3685 / 3536; --shape: inset(31% 22% 3% 6% round 10px); }
-.c-tower { --ar: 3 / 2; --shape: inset(36% 2% 0 2% round 10px); }
-.c-lounge { --ar: 1150 / 1039; --shape: inset(27% 4% 0 4% round 10px); }
-.c-canopy { --ar: 1444 / 861; --shape: inset(38% 1% 0 2% round 10px); }
-.grid .card:nth-child(even) { margin-top: 12%; }
-@media (max-width: 860px) {
-  .hero { grid-template-columns: 1fr; }
-  .hero-pop { margin-top: 0; }
-  .grid { grid-template-columns: 1fr; }
-  .grid .card:nth-child(even) { margin-top: 0; }
-}
-
 </style>
+
+<link rel="stylesheet" href="../assets/vendor/swiper/swiper-bundle.min.css?v=fc51f21167">
+<link rel="stylesheet" href="../gallery.css?v=69ee7d34c6">
+
 </head>
 <body>
-<header class="head">
-  <a class="brand" href="../" aria-label="Force Point"><img src="../assets/img/logo-dark-240.webp?v=c1f12a60f7" width="240" height="271" alt=""></a>
-  <nav aria-label="Основное меню"><a href="#build">что строим</a><a href="#build">работы</a><a href="#build">цены</a><a href="#build">контакты</a></nav>
-  <a class="btn btn--small" href="#build">рассчитать стоимость</a>
-</header>
 
-<main class="wrap">
-  <section class="hero">
+<header class="head">
+  <a class="brand" href="./" aria-label="Force Point"><img src="../assets/img/logo-dark-240.webp?v=c1f12a60f7" width="240" height="271" alt=""></a>
+  <nav aria-label="Основное меню">
+    <a href="#build">что строим</a><a href="#works">работы</a><a href="#path">как работаем</a><a href="#faq">вопросы</a><a href="#order">контакты</a>
+  </nav>
+  <a class="btn btn--small" href="#order">рассчитать стоимость</a>
+  <button class="burger" type="button" aria-label="Меню" aria-expanded="false" aria-controls="menu"><span></span><span></span></button>
+</header>
+<div class="menu" id="menu">
+  <nav aria-label="Меню">
+    <a href="#build">что строим</a><a href="#works">работы</a><a href="#path">как работаем</a><a href="#faq">вопросы</a><a href="#order">контакты</a>
+  </nav>
+  <a class="phone" href="tel:+79165801607">+7 916 580-16-07</a>
+  <a class="btn" href="#order">рассчитать стоимость</a>
+</div>
+
+
+<main>
+  <section class="wrap hero">
     <div>
       <h1><span>дома</span> <span>на деревьях</span></h1>
       <p>И детские площадки, и места для отдыха на вашем участке. Каждый объект рисуем под участок и собираем своей бригадой.</p>
-      <div class="actions"><a class="btn" href="#build">рассчитать стоимость</a><a class="btn btn--light" href="#build">посмотреть работы</a></div>
+      <div class="actions"><a class="btn" href="#order">рассчитать стоимость</a><a class="btn btn--light" href="#works">посмотреть работы</a></div>
     </div>
     <figure>
-      <div class="pop hero-pop">
-<div class="pop-shape"><img src="../img/pop/tall-1200.webp?v=ecd16b6f24" srcset="../img/pop/tall-640.webp?v=1d56a792fd 640w, ../img/pop/tall-1200.webp?v=ecd16b6f24 1200w" sizes="(max-width: 860px) 92vw, 640px" width="1200" height="1200" alt="Дом на дереве с панорамным окном и лестницей, вид снизу на фоне неба" fetchpriority="high"></div>
+      <div class="pop hero-pop" data-lift>
+<div class="pop-shape"><img src="../img/pop/tall-plate-1200.webp?v=9c66aa009f" srcset="../img/pop/tall-plate-640.webp?v=70918357fa 640w, ../img/pop/tall-plate-1200.webp?v=9c66aa009f 1200w" sizes="(max-width: 860px) 92vw, 640px" width="1200" height="1200" alt="Дом на дереве с панорамным окном и лестницей, вид снизу на фоне неба" fetchpriority="high"></div>
 <img class="pop-cut" src="../img/pop/tall-cut-1200.webp?v=58cfedeafc" srcset="../img/pop/tall-cut-640.webp?v=385f4dd05f 640w, ../img/pop/tall-cut-1200.webp?v=58cfedeafc 1200w" sizes="(max-width: 860px) 92vw, 640px" width="1200" height="1200" alt="" aria-hidden="true" fetchpriority="high">
 
 </div>
       <figcaption class="hero-note">Дом с панорамным окном <span class="price">похожий – от 3 млн ₽*</span></figcaption>
     </figure>
   </section>
-  <div class="line"></div>
-  <section class="build" id="build">
-    <h2>что построим <b>у вас</b></h2>
+
+  <div class="line" aria-hidden="true">
+    <div class="line-track"><span>подвесные мосты</span><span>скалодромы</span><span>пожарные шесты</span><span>качели-гнёзда</span><span>песочницы со скамьями</span><span>беседки</span><span>зоны у очага</span><span>гаражи с местом для семьи</span><span>вольеры</span><span>входные группы</span><span>игровые корабли</span><span>подвесные мосты</span><span>скалодромы</span><span>пожарные шесты</span><span>качели-гнёзда</span><span>песочницы со скамьями</span><span>беседки</span><span>зоны у очага</span><span>гаражи с местом для семьи</span><span>вольеры</span><span>входные группы</span><span>игровые корабли</span></div>
+  </div>
+
+  <section class="wrap section" id="build">
+    <h2 class="title">что построим <b>у вас</b></h2>
     <div class="grid">
-      <a class="card" href="#build"><div class="pop c-pine">
-<div class="pop-shape"><img src="../img/pop/pine-1200.webp?v=fd95b093e8" srcset="../img/pop/pine-640.webp?v=942b3dab69 640w, ../img/pop/pine-1200.webp?v=fd95b093e8 1200w" sizes="(max-width: 860px) 92vw, 600px" width="1200" height="1151" alt="Дом на дереве на стальных опорах в сосновом лесу" loading="lazy"></div>
-<img class="pop-cut" src="../img/pop/pine-cut-1200.webp?v=dfe029a0f3" srcset="../img/pop/pine-cut-640.webp?v=f5804e5b0f 640w, ../img/pop/pine-cut-1200.webp?v=dfe029a0f3 1200w" sizes="(max-width: 860px) 92vw, 600px" width="1200" height="1151" alt="" aria-hidden="true" loading="lazy">
+      <a class="card" href="#works"><div class="pop c-pine" data-lift>
+<div class="pop-shape"><img src="../img/pop/pine-plate-1200.webp?v=b227804903" srcset="../img/pop/pine-plate-640.webp?v=ed4f03df9e 640w, ../img/pop/pine-plate-1200.webp?v=b227804903 1200w" sizes="(max-width: 640px) 92vw, 600px" width="1200" height="1151" alt="Дом на дереве на стальных опорах с террасой и лестницей в сосновом лесу" loading="lazy"></div>
+<img class="pop-cut" src="../img/pop/pine-cut-1200.webp?v=dfe029a0f3" srcset="../img/pop/pine-cut-640.webp?v=f5804e5b0f 640w, ../img/pop/pine-cut-1200.webp?v=dfe029a0f3 1200w" sizes="(max-width: 640px) 92vw, 600px" width="1200" height="1151" alt="" aria-hidden="true" loading="lazy">
 
-</div><h3>дома на деревьях</h3><p>Для игр, ночёвок и вечеров всей семьёй.</p><span class="price">от 1,5 млн ₽*</span></a>
-      <a class="card" href="#build"><div class="pop c-tower">
-<div class="pop-shape"><img src="../img/pop/tower-1200.webp?v=9f5b373edf" srcset="../img/pop/tower-640.webp?v=e5bf7ed9df 640w, ../img/pop/tower-1200.webp?v=9f5b373edf 1200w" sizes="(max-width: 860px) 92vw, 600px" width="1200" height="800" alt="Башня с горкой, скалодромом и сеткой на фоне неба" loading="lazy"></div>
-<img class="pop-cut" src="../img/pop/tower-cut-1200.webp?v=272f711679" srcset="../img/pop/tower-cut-640.webp?v=d4db735b10 640w, ../img/pop/tower-cut-1200.webp?v=272f711679 1200w" sizes="(max-width: 860px) 92vw, 600px" width="1200" height="800" alt="" aria-hidden="true" loading="lazy">
+</div><h3>дома на деревьях</h3><p>Для игр, ночёвок и вечеров всей семьёй: детский, семейный или гостевой.</p><span class="price">от 1,5 млн ₽*</span></a>
+      <a class="card" href="#works"><div class="pop c-tower" data-lift>
+<div class="pop-shape"><img src="../img/pop/tower-plate-1200.webp?v=e1f5e647fe" srcset="../img/pop/tower-plate-640.webp?v=f2928c6d18 640w, ../img/pop/tower-plate-1200.webp?v=e1f5e647fe 1200w" sizes="(max-width: 640px) 92vw, 600px" width="1200" height="800" alt="Башня с горкой, скалодромом и сеткой на фоне неба" loading="lazy"></div>
+<img class="pop-cut" src="../img/pop/tower-cut-1200.webp?v=272f711679" srcset="../img/pop/tower-cut-640.webp?v=d4db735b10 640w, ../img/pop/tower-cut-1200.webp?v=272f711679 1200w" sizes="(max-width: 640px) 92vw, 600px" width="1200" height="800" alt="" aria-hidden="true" loading="lazy">
 
-</div><h3>детские площадки</h3><p>Башни, горки, скалодромы и сетки.</p><span class="price">готовые от 63 000 ₽*</span></a>
-      <a class="card" href="#build"><div class="pop c-lounge">
-<div class="pop-shape"><img src="../img/pop/lounge-1200.webp?v=35604b1f19" srcset="../img/pop/lounge-640.webp?v=a756a510f2 640w, ../img/pop/lounge-1200.webp?v=35604b1f19 1200w" sizes="(max-width: 860px) 92vw, 600px" width="1200" height="1084" alt="Вечерняя зона отдыха с навесом-шалашом и очагом" loading="lazy"></div>
-<img class="pop-cut" src="../img/pop/lounge-cut-1200.webp?v=0dac699942" srcset="../img/pop/lounge-cut-640.webp?v=8b97aae8d5 640w, ../img/pop/lounge-cut-1200.webp?v=0dac699942 1200w" sizes="(max-width: 860px) 92vw, 600px" width="1200" height="1084" alt="" aria-hidden="true" loading="lazy">
+</div><h3>детские площадки</h3><p>Башни, горки, скалодромы и сетки. Готовый комплекс или свой проект под двор.</p><span class="price">готовые от 63 000 ₽*, свои от 1,2 млн ₽*</span></a>
+      <a class="card" href="#works"><div class="pop c-lounge" data-lift>
+<div class="pop-shape"><img src="../img/pop/lounge-plate-1200.webp?v=b19acb418e" srcset="../img/pop/lounge-plate-640.webp?v=e342bce516 640w, ../img/pop/lounge-plate-1200.webp?v=b19acb418e 1200w" sizes="(max-width: 640px) 92vw, 600px" width="1200" height="1084" alt="Вечерняя зона отдыха с навесом-шалашом, креслами и очагом" loading="lazy"></div>
+<img class="pop-cut" src="../img/pop/lounge-cut-1200.webp?v=0dac699942" srcset="../img/pop/lounge-cut-640.webp?v=8b97aae8d5 640w, ../img/pop/lounge-cut-1200.webp?v=0dac699942 1200w" sizes="(max-width: 640px) 92vw, 600px" width="1200" height="1084" alt="" aria-hidden="true" loading="lazy">
 
-</div><h3>отдых на участке</h3><p>Беседки, качели, зона у очага.</p><span class="price">скамьи и столы от 60 000 ₽*</span></a>
-      <a class="card" href="#build"><div class="pop c-canopy">
-<div class="pop-shape"><img src="../img/pop/canopy-1200.webp?v=cead79ba4e" srcset="../img/pop/canopy-640.webp?v=a4f1229f09 640w, ../img/pop/canopy-1200.webp?v=cead79ba4e 1200w" sizes="(max-width: 860px) 92vw, 600px" width="1200" height="716" alt="Входная группа парка с деревянным навесом" loading="lazy"></div>
-<img class="pop-cut" src="../img/pop/canopy-cut-1200.webp?v=304e7f9250" srcset="../img/pop/canopy-cut-640.webp?v=be86781c4c 640w, ../img/pop/canopy-cut-1200.webp?v=304e7f9250 1200w" sizes="(max-width: 860px) 92vw, 600px" width="1200" height="716" alt="" aria-hidden="true" loading="lazy">
+</div><h3>отдых на участке</h3><p>Беседки, качели, зона у очага, навес для машины с местом для семьи.</p><span class="price">скамьи и столы от 60 000 ₽*</span></a>
+      <a class="card" href="#works"><div class="pop c-canopy" data-lift>
+<div class="pop-shape"><img src="../img/pop/canopy-plate-1200.webp?v=c277a90925" srcset="../img/pop/canopy-plate-640.webp?v=51bd21ce42 640w, ../img/pop/canopy-plate-1200.webp?v=c277a90925 1200w" sizes="(max-width: 640px) 92vw, 600px" width="1200" height="716" alt="Входная группа парка: деревянный навес, водонапорная башня и ограда из каната" loading="lazy"></div>
+<img class="pop-cut" src="../img/pop/canopy-cut-1200.webp?v=542660ccea" srcset="../img/pop/canopy-cut-640.webp?v=06d01d6c94 640w, ../img/pop/canopy-cut-1200.webp?v=542660ccea 1200w" sizes="(max-width: 640px) 92vw, 600px" width="1200" height="716" alt="" aria-hidden="true" loading="lazy">
 
-</div><h3>для бизнеса</h3><p>Входные группы, игровые корабли, верёвочные парки.</p><span class="price">тематическая зона от 2,5 млн ₽*</span></a>
+</div><h3>для бизнеса</h3><p>Входные группы, игровые корабли и верёвочные парки для отелей, посёлков, ресторанов.</p><span class="price">игровой уголок для кафе от 362 300 ₽*, тематическая зона от 2,5 млн ₽*</span></a>
     </div>
   </section>
-  <div style="height: var(--space)"></div>
+
+  <section class="wrap section sketch">
+    <div>
+      <h2 class="title">сначала рисуем, <b>потом строим</b></h2>
+      <p class="lead">Эскиз рисуем после выезда на участок, ещё до договора на строительство. По нему видно, как объект встанет между деревьями.</p>
+    </div>
+    <div class="compare">
+      <img src="../img/compare-sketch.webp?v=7c0fb1abaa" width="1600" height="900" alt="Эскиз дома на дереве с подвесным мостом, качелями и лестницей" loading="lazy">
+      <div class="compare-photo"><img src="../img/compare-photo.webp?v=628adcccfe" width="1600" height="900" alt="Готовый дом на дереве с подвесным мостом, качелями и лестницей, вид сверху" loading="lazy"></div>
+      <span class="compare-label compare-label--left">эскиз</span>
+      <span class="compare-label compare-label--right">готовый объект</span>
+      <input class="compare-range" type="range" min="0" max="100" value="50" aria-label="Сравнить эскиз и готовый объект">
+      <span class="compare-handle" aria-hidden="true"></span>
+    </div>
+  </section>
+
+  <section class="wrap section" id="works">
+    <div class="works-head"><h2 class="title">что уже <b>стоит</b></h2></div>
+    
+    <div class="ribbon">
+      <div class="swiper"><div class="swiper-wrapper">
+        
+        <article class="swiper-slide work">
+          <div class="work-photo"><picture class=""><source type="image/webp" srcset="../media/treehouse-aerial-bridge-photo-400.webp?v=6bc2d431eb 400w, ../media/treehouse-aerial-bridge-photo-640.webp?v=dd4ed55a1a 640w, ../media/treehouse-aerial-bridge-photo-1040.webp?v=4059f0c45e 1040w, ../media/treehouse-aerial-bridge-photo-1440.webp?v=79b7516b16 1440w" sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 400px"><img src="../media/treehouse-aerial-bridge-photo-1440.jpg?v=f886930500" srcset="../media/treehouse-aerial-bridge-photo-400.jpg?v=2b773473aa 400w, ../media/treehouse-aerial-bridge-photo-640.jpg?v=0a26b4a49d 640w, ../media/treehouse-aerial-bridge-photo-1040.jpg?v=4ec1fe2b7a 1040w, ../media/treehouse-aerial-bridge-photo-1440.jpg?v=f886930500 1440w" sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 400px" width="1440" height="1080" alt="Вид сверху на дом на дереве с террасой, подвесным мостом, качелями и горкой" loading="lazy" decoding="async"></picture></div>
+          <h3>дом с мостом и горкой</h3>
+          <p>Под мостом качели, с террасы спуск по шесту</p>
+          <span class="price">похожий – от 1,5 млн ₽*</span>
+        </article>
+        
+        <article class="swiper-slide work">
+          <div class="work-photo"><picture class=""><source type="image/webp" srcset="../media/treehouse-rope-bridge-photo-400.webp?v=8290dca514 400w, ../media/treehouse-rope-bridge-photo-640.webp?v=a1b5d60215 640w, ../media/treehouse-rope-bridge-photo-1040.webp?v=e4dfe15c56 1040w, ../media/treehouse-rope-bridge-photo-1440.webp?v=17ed5c8c1c 1440w" sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 400px"><img src="../media/treehouse-rope-bridge-photo-1440.jpg?v=fd3db1ac92" srcset="../media/treehouse-rope-bridge-photo-400.jpg?v=e15e7bd362 400w, ../media/treehouse-rope-bridge-photo-640.jpg?v=6808625550 640w, ../media/treehouse-rope-bridge-photo-1040.jpg?v=f145838a31 1040w, ../media/treehouse-rope-bridge-photo-1440.jpg?v=fd3db1ac92 1440w" sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 400px" width="1440" height="1080" alt="Верёвочный мост, который ведёт к светлому дому на дереве в сосновом лесу" loading="lazy" decoding="async"></picture></div>
+          <h3>дом за подвесным мостом</h3>
+          <p>Мост идёт между соснами к мансарде</p>
+          <span class="price">похожий – от 3 млн ₽*</span>
+        </article>
+        
+        <article class="swiper-slide work">
+          <div class="work-photo"><picture class=""><source type="image/webp" srcset="../media/treehouse-glass-facade-photo-400.webp?v=afebae0e97 400w, ../media/treehouse-glass-facade-photo-640.webp?v=7eb2a682e7 640w, ../media/treehouse-glass-facade-photo-1040.webp?v=231516ab51 1040w, ../media/treehouse-glass-facade-photo-1440.webp?v=cb8a4ddcd5 1440w" sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 400px"><img src="../media/treehouse-glass-facade-photo-1440.jpg?v=e43c7f4366" srcset="../media/treehouse-glass-facade-photo-400.jpg?v=5e5171f8b6 400w, ../media/treehouse-glass-facade-photo-640.jpg?v=f4a2cd9cd5 640w, ../media/treehouse-glass-facade-photo-1040.jpg?v=2d2a5edcd0 1040w, ../media/treehouse-glass-facade-photo-1440.jpg?v=e43c7f4366 1440w" sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 400px" width="1440" height="1080" alt="Фасад дома на дереве с витражным остеклением от пола до конька" loading="lazy" decoding="async"></picture></div>
+          <h3>дом со стеклом до конька</h3>
+          <p>Остекление от пола до самой крыши</p>
+          <span class="price">похожий – от 3 млн ₽*</span>
+        </article>
+        
+        <article class="swiper-slide work">
+          <div class="work-photo"><picture class=""><source type="image/webp" srcset="../media/treehouse-interior-kitchen-photo-400.webp?v=812917f1de 400w, ../media/treehouse-interior-kitchen-photo-640.webp?v=5ee68cf496 640w, ../media/treehouse-interior-kitchen-photo-1040.webp?v=7f792c9aa9 1040w" sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 400px"><img src="../media/treehouse-interior-kitchen-photo-1040.jpg?v=c161019654" srcset="../media/treehouse-interior-kitchen-photo-400.jpg?v=e3adbbb506 400w, ../media/treehouse-interior-kitchen-photo-640.jpg?v=1b96a8bc0f 640w, ../media/treehouse-interior-kitchen-photo-1040.jpg?v=c161019654 1040w" sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 400px" width="1040" height="780" alt="Интерьер дома на дереве: небольшая кухня, стол у окна и деревянная отделка" loading="lazy" decoding="async"></picture></div>
+          <h3>дом, где можно жить</h3>
+          <p>Кухня, стол у окна, отделка деревом</p>
+          <span class="price">похожий – от 8 млн ₽*</span>
+        </article>
+        
+        <article class="swiper-slide work">
+          <div class="work-photo"><picture class=""><source type="image/webp" srcset="../media/treehouse-winter-bridge-photo-400.webp?v=1ce4802572 400w, ../media/treehouse-winter-bridge-photo-640.webp?v=5b5fbfdbe6 640w, ../media/treehouse-winter-bridge-photo-1040.webp?v=c20e8604de 1040w, ../media/treehouse-winter-bridge-photo-1440.webp?v=03ac193f1c 1440w" sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 400px"><img src="../media/treehouse-winter-bridge-photo-1440.jpg?v=fefff6287c" srcset="../media/treehouse-winter-bridge-photo-400.jpg?v=ee85cf584c 400w, ../media/treehouse-winter-bridge-photo-640.jpg?v=def1ab112f 640w, ../media/treehouse-winter-bridge-photo-1040.jpg?v=12b1c376d1 1040w, ../media/treehouse-winter-bridge-photo-1440.jpg?v=fefff6287c 1440w" sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 400px" width="1440" height="1080" alt="Дом на дереве зимой: тёплый свет в окнах, подвесной мост и заснеженная терраса" loading="lazy" decoding="async"></picture></div>
+          <h3>дом с мостом зимой</h3>
+          <p>Свет в окнах, снег на террасе</p>
+          <span class="price">похожий – от 3 млн ₽*</span>
+        </article>
+        
+        <article class="swiper-slide work">
+          <div class="work-photo"><picture class=""><source type="image/webp" srcset="../media/playground-climbing-wall-photo-400.webp?v=6f0dec5c34 400w, ../media/playground-climbing-wall-photo-640.webp?v=3211d13ad9 640w, ../media/playground-climbing-wall-photo-1040.webp?v=20fc984f72 1040w, ../media/playground-climbing-wall-photo-1440.webp?v=e0afb1255c 1440w" sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 400px"><img src="../media/playground-climbing-wall-photo-1440.jpg?v=caf5a01cbb" srcset="../media/playground-climbing-wall-photo-400.jpg?v=457d9e8250 400w, ../media/playground-climbing-wall-photo-640.jpg?v=95fed715fb 640w, ../media/playground-climbing-wall-photo-1040.jpg?v=14c171f7a8 1040w, ../media/playground-climbing-wall-photo-1440.jpg?v=caf5a01cbb 1440w" sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 400px" width="1440" height="1080" alt="Площадка со скалодромом, горкой и переходом среди зелени" loading="lazy" decoding="async"></picture></div>
+          <h3>площадка со скалодромом</h3>
+          <p>Переход на высоте, горка, домик на опорах</p>
+          <span class="price">похожая – от 1,2 млн ₽*</span>
+        </article>
+        
+        <article class="swiper-slide work">
+          <div class="work-photo"><picture class=""><source type="image/webp" srcset="../media/playground-tower-slide-photo-400.webp?v=98510f8fa3 400w, ../media/playground-tower-slide-photo-640.webp?v=9d4a29859f 640w, ../media/playground-tower-slide-photo-1040.webp?v=27f708b9cd 1040w, ../media/playground-tower-slide-photo-1440.webp?v=8dc1e6f840 1440w" sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 400px"><img src="../media/playground-tower-slide-photo-1440.jpg?v=c85c052a0d" srcset="../media/playground-tower-slide-photo-400.jpg?v=5f56b94ab7 400w, ../media/playground-tower-slide-photo-640.jpg?v=b23dbc18b7 640w, ../media/playground-tower-slide-photo-1040.jpg?v=a00e4dc8e4 1040w, ../media/playground-tower-slide-photo-1440.jpg?v=c85c052a0d 1440w" sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 400px" width="1440" height="1080" alt="Игровая башня с горкой, лестницей и скалодромом рядом с домом" loading="lazy" decoding="async"></picture></div>
+          <h3>башня с горкой</h3>
+          <p>Горка, лестница и скалодром у дома</p>
+          <span class="price">похожая – от 350 000 ₽*</span>
+        </article>
+        
+        <article class="swiper-slide work">
+          <div class="work-photo"><picture class=""><source type="image/webp" srcset="../media/maf-sandbox-photo-400.webp?v=9279808a05 400w, ../media/maf-sandbox-photo-640.webp?v=5e145e6d97 640w, ../media/maf-sandbox-photo-1040.webp?v=993dd2cbe0 1040w, ../media/maf-sandbox-photo-1440.webp?v=0b0225e86b 1440w" sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 400px"><img src="../media/maf-sandbox-photo-1440.jpg?v=769521592c" srcset="../media/maf-sandbox-photo-400.jpg?v=f392730ab9 400w, ../media/maf-sandbox-photo-640.jpg?v=94f261f24e 640w, ../media/maf-sandbox-photo-1040.jpg?v=5c1559932f 1040w, ../media/maf-sandbox-photo-1440.jpg?v=769521592c 1440w" sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 400px" width="1440" height="1080" alt="Песочница с откидной крышкой, которая превращается в скамьи" loading="lazy" decoding="async"></picture></div>
+          <h3>песочница со скамьями</h3>
+          <p>Крышка раскладывается в две скамьи</p>
+          <span class="price">похожая – от 60 000 ₽*</span>
+        </article>
+        
+        <article class="swiper-slide work">
+          <div class="work-photo"><picture class=""><source type="image/webp" srcset="../media/maf-swing-canopy-photo-400.webp?v=bd885c6c1b 400w, ../media/maf-swing-canopy-photo-640.webp?v=07d58d78c9 640w, ../media/maf-swing-canopy-photo-1040.webp?v=1d4739a921 1040w, ../media/maf-swing-canopy-photo-1440.webp?v=eb9184885b 1440w" sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 400px"><img src="../media/maf-swing-canopy-photo-1440.jpg?v=2300e499a6" srcset="../media/maf-swing-canopy-photo-400.jpg?v=3086bb4e81 400w, ../media/maf-swing-canopy-photo-640.jpg?v=715c5f6331 640w, ../media/maf-swing-canopy-photo-1040.jpg?v=1d752b301c 1040w, ../media/maf-swing-canopy-photo-1440.jpg?v=2300e499a6 1440w" sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 400px" width="1440" height="1080" alt="Качели-гнездо под деревянным навесом на подстриженном газоне" loading="lazy" decoding="async"></picture></div>
+          <h3>качели-гнездо под навесом</h3>
+          <p>Навес из бруса на краю газона</p>
+          <span class="price">похожие – от 60 000 ₽*</span>
+        </article>
+        
+        <article class="swiper-slide work">
+          <div class="work-photo"><picture class=""><source type="image/webp" srcset="../media/thematic-rock-house-photo-400.webp?v=32a571f581 400w, ../media/thematic-rock-house-photo-640.webp?v=7350e393fb 640w, ../media/thematic-rock-house-photo-1040.webp?v=8678675af8 1040w" sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 400px"><img src="../media/thematic-rock-house-photo-1040.jpg?v=0653b5b655" srcset="../media/thematic-rock-house-photo-400.jpg?v=ecc52533ff 400w, ../media/thematic-rock-house-photo-640.jpg?v=3fa2bc5f8d 640w, ../media/thematic-rock-house-photo-1040.jpg?v=0653b5b655 1040w" sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 400px" width="1040" height="780" alt="Тематический игровой объект у скального рельефа с настилами и переходами" loading="lazy" decoding="async"></picture></div>
+          <h3>тематическая зона</h3>
+          <p>Тотем на входе вырезал Иван</p>
+          <span class="price">похожая – от 2,5 млн ₽*</span>
+        </article>
+        
+        <article class="swiper-slide work">
+          <div class="work-photo"><picture class=""><source type="image/webp" srcset="../media/thematic-pirate-ship-photo-400.webp?v=a9a3cf1a3a 400w, ../media/thematic-pirate-ship-photo-640.webp?v=6f263b52ea 640w, ../media/thematic-pirate-ship-photo-1040.webp?v=8a34c6db50 1040w" sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 400px"><img src="../media/thematic-pirate-ship-photo-1040.jpg?v=18fb494911" srcset="../media/thematic-pirate-ship-photo-400.jpg?v=8ec1dc99d4 400w, ../media/thematic-pirate-ship-photo-640.jpg?v=862c6c1265 640w, ../media/thematic-pirate-ship-photo-1040.jpg?v=18fb494911 1040w" sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 400px" width="1040" height="780" alt="Тематический игровой объект в виде корабля с горкой и палубными элементами" loading="lazy" decoding="async"></picture></div>
+          <h3>игровой корабль</h3>
+          <p>Палуба, пушка, канатная сетка и горка</p>
+          <span class="price">похожий – от 2,5 млн ₽*</span>
+        </article>
+        
+        <article class="swiper-slide work">
+          <div class="work-photo"><picture class=""><source type="image/webp" srcset="../media/rope-park-platforms-photo-400.webp?v=c389885fc9 400w, ../media/rope-park-platforms-photo-640.webp?v=75e1d5eaaa 640w, ../media/rope-park-platforms-photo-1040.webp?v=57ece82b24 1040w" sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 400px"><img src="../media/rope-park-platforms-photo-1040.jpg?v=cba55e2bfb" srcset="../media/rope-park-platforms-photo-400.jpg?v=2535c9f5f9 400w, ../media/rope-park-platforms-photo-640.jpg?v=7646defadf 640w, ../media/rope-park-platforms-photo-1040.jpg?v=cba55e2bfb 1040w" sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 400px" width="1040" height="780" alt="Верёвочный парк: платформы на деревьях и навесные переходы между ними" loading="lazy" decoding="async"></picture></div>
+          <h3>верёвочный парк на соснах</h3>
+          <p>Платформы на деревьях и переходы между ними</p>
+          <span class="price">похожий – от 900 000 ₽*</span>
+        </article>
+        
+      </div></div>
+    </div>
+  </section>
+
+  <section class="wrap section faq" id="faq">
+    <div>
+      <h2 class="title">о чём спрашивают <b>до заказа</b></h2>
+      <div class="pop faq-pop" data-lift>
+<div class="pop-shape"><img src="../img/pop/module-plate-1200.webp?v=e2858b726d" srcset="../img/pop/module-plate-640.webp?v=9043a01337 640w, ../img/pop/module-plate-1200.webp?v=e2858b726d 1200w" sizes="(max-width: 860px) 80vw, 460px" width="1200" height="1200" alt="Игровой дом-башня с качелями и горкой" loading="lazy"></div>
+<img class="pop-cut" src="../img/pop/module-cut-1200.webp?v=d623a545c9" srcset="../img/pop/module-cut-640.webp?v=875f22e8e5 640w, ../img/pop/module-cut-1200.webp?v=d623a545c9 1200w" sizes="(max-width: 860px) 80vw, 460px" width="1200" height="1200" alt="" aria-hidden="true" loading="lazy">
+
+</div>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item"><summary>Дерево не погибнет от болтов?</summary><p>Болты точим сами из нержавеющей стали, один держит около 2,5 т. Ствол не обжимаем по кругу, поэтому дерево растёт дальше.</p></details>
+      <details class="faq-item"><summary>А если крепких деревьев нет?</summary><p>Ставим дом на опоры, а стволы пропускаем сквозь террасу. Подходят сосна, дуб, лиственница и кедр от 22–26 см в диаметре, берёза и тополь не подходят.</p></details>
+      <details class="faq-item"><summary>Строите зимой?</summary><p>Да, круглый год. Зимой в бетон добавляем присадки, в сильный мороз греем его под плёнкой. Очередь зимой короче.</p></details>
+      <details class="faq-item"><summary>Сколько ждать?</summary><p>Дом по своему проекту обычно 30–45 рабочих дней от начала изготовления до сборки. Готовый комплекс со склада забираете сразу, под заказ – около 10 рабочих дней.</p></details>
+      <details class="faq-item"><summary>Эскиз тоже бесплатный?</summary><p>Нет, на эскиз заключаем отдельный договор. По нему видно, как объект встанет между деревьями, и по нему же считаем цену под ключ.</p></details>
+      <details class="faq-item"><summary>Сумма в договоре окончательная?</summary><p>Да. В договоре итог под ключ, доставка и сборка отдельными строками. Если мы ошиблись в расчёте, доплачивать не придётся.</p></details>
+      <details class="faq-item"><summary>Что после сдачи?</summary><p>Гарантия 12 месяцев с подписания акта: если что-то случится, приезжаем и меняем.</p></details>
+      <details class="faq-item"><summary>Работаете не в Москве?</summary><p>Да, по всей России. Дорога и проживание бригады идут в смете отдельной строкой.</p></details>
+    </div>
+  </section>
+
+  <section class="path" id="path">
+    <div class="wrap">
+      <div class="path-head">
+        <div>
+          <h2 class="title">как всё <b>будет</b></h2>
+          <p class="lead">Звонок принимает Иван Чернов. Он же приезжает на замер и отвечает за объект до сдачи.</p>
+        </div>
+        <figure class="path-clip">
+          <video class="clip" muted loop playsinline preload="none" poster="../media/clip-treehouse-build-poster.jpg?v=e2d893b3ee" aria-label="Сборка дома на дереве на участке: каркас, стены и крыша за один день" data-autoplay><source src="../media/clip-treehouse-build.mp4?v=4f25668af1" type="video/mp4"></video>
+          <figcaption>Сборка на участке: каркас, стены и крыша за один день</figcaption>
+        </figure>
+      </div>
+      <ol class="stops">
+        <li class="stop"><span class="stop-pic stop-pic--draw"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M22 6 H42 Q47 6 47 11 V53 Q47 58 42 58 H22 Q17 58 17 53 V11 Q17 6 22 6 Z M28 52 H36 M23 16 H41 V44 H23 Z M29 25 L37 30 L29 35 Z"/></svg></span><b>присылаете видео участка</b><span>и кадастровый номер, если он есть</span></li>
+        <li class="stop"><span class="stop-pic"><picture class=""><source type="image/webp" srcset="../media/territory-lawn-overview-square-400.webp?v=c8f7b0aab2 400w, ../media/territory-lawn-overview-square-560.webp?v=ce789a3e82 560w, ../media/territory-lawn-overview-square-900.webp?v=698f53115a 900w" sizes="88px"><img src="../media/territory-lawn-overview-square-900.jpg?v=9c3ebde819" srcset="../media/territory-lawn-overview-square-400.jpg?v=f500949a22 400w, ../media/territory-lawn-overview-square-560.jpg?v=3697555dc4 560w, ../media/territory-lawn-overview-square-900.jpg?v=9c3ebde819 900w" sizes="88px" width="900" height="900" alt="Общий план участка: газон, дорожки и игровая зона в глубине" loading="lazy" decoding="async"></picture></span><b>приезжаем на участок</b><span>бесплатно в Москве и области</span></li>
+        <li class="stop"><span class="stop-pic"><picture class=""><source type="image/webp" srcset="../media/design-sketch-treehouse-square-400.webp?v=b82aae6fd7 400w, ../media/design-sketch-treehouse-square-560.webp?v=93d6644e6e 560w, ../media/design-sketch-treehouse-square-900.webp?v=8522b46ccd 900w, ../media/design-sketch-treehouse-square-1200.webp?v=9498bd404b 1200w" sizes="88px"><img src="../media/design-sketch-treehouse-square-1200.jpg?v=05b1c8e98c" srcset="../media/design-sketch-treehouse-square-400.jpg?v=1373f6c370 400w, ../media/design-sketch-treehouse-square-560.jpg?v=0585a90de3 560w, ../media/design-sketch-treehouse-square-900.jpg?v=b56569fb1a 900w, ../media/design-sketch-treehouse-square-1200.jpg?v=05b1c8e98c 1200w" sizes="88px" width="1200" height="1200" alt="Карандашный эскиз дома на дереве, нарисованный Иваном" loading="lazy" decoding="async"></picture></span><b>Иван рисует эскиз</b><span>и считает цену под ключ</span></li>
+        <li class="stop"><span class="stop-pic"><picture class=""><source type="image/webp" srcset="../media/workshop-play-complex-square-400.webp?v=d7faf02c1e 400w, ../media/workshop-play-complex-square-560.webp?v=f8998ed051 560w, ../media/workshop-play-complex-square-900.webp?v=fe3fc75cd9 900w" sizes="88px"><img src="../media/workshop-play-complex-square-900.jpg?v=4e48889508" srcset="../media/workshop-play-complex-square-400.jpg?v=f8fd1c5065 400w, ../media/workshop-play-complex-square-560.jpg?v=ac80da3191 560w, ../media/workshop-play-complex-square-900.jpg?v=4e48889508 900w" sizes="88px" width="900" height="900" alt="Игровой комплекс в сборе на площадке цеха до отправки на объект" loading="lazy" decoding="async"></picture></span><b>делаем в мастерской</b><span>80% объекта собираем в цеху</span></li>
+        <li class="stop"><span class="stop-pic"><picture class=""><source type="image/webp" srcset="../media/assembly-crane-lift-square-400.webp?v=233c8b02b6 400w, ../media/assembly-crane-lift-square-560.webp?v=fa13bb8501 560w, ../media/assembly-crane-lift-square-900.webp?v=7e15b6fd91 900w" sizes="88px"><img src="../media/assembly-crane-lift-square-900.jpg?v=03fa86fd1b" srcset="../media/assembly-crane-lift-square-400.jpg?v=1531cb87ff 400w, ../media/assembly-crane-lift-square-560.jpg?v=23a29b1f7d 560w, ../media/assembly-crane-lift-square-900.jpg?v=03fa86fd1b 900w" sizes="88px" width="900" height="900" alt="Кран поднимает готовый модуль объекта на место установки" loading="lazy" decoding="async"></picture></span><b>собираем на участке</b><span>те же люди, что в мастерской</span></li>
+        <li class="stop"><span class="stop-pic"><picture class=""><source type="image/webp" srcset="../media/treehouse-winter-evening-square-400.webp?v=2ee58e51af 400w, ../media/treehouse-winter-evening-square-560.webp?v=f16af2b192 560w, ../media/treehouse-winter-evening-square-900.webp?v=4223048073 900w, ../media/treehouse-winter-evening-square-1200.webp?v=a440a4d45d 1200w" sizes="88px"><img src="../media/treehouse-winter-evening-square-1200.jpg?v=803f0d57bf" srcset="../media/treehouse-winter-evening-square-400.jpg?v=f44b417ddc 400w, ../media/treehouse-winter-evening-square-560.jpg?v=d5a7dcf491 560w, ../media/treehouse-winter-evening-square-900.jpg?v=ee003bd482 900w, ../media/treehouse-winter-evening-square-1200.jpg?v=803f0d57bf 1200w" sizes="88px" width="1200" height="1200" alt="Зимний вечер: дом на дереве с подсветкой и лестницей на снегу" loading="lazy" decoding="async"></picture></span><b>через год приезжаем</b><span>первое обслуживание бесплатно</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="wrap section final" id="order">
+    <div>
+      <h2 class="title">расскажите, <b>что задумали</b></h2>
+      <p class="lead">Пришлите видео участка или просто позвоните: прикинем по похожим объектам и договоримся о выезде.</p>
+      <a class="phone" href="tel:+79165801607">+7 916 580-16-07</a>
+      <div class="actions"><a class="btn" href="tel:+79165801607">заказать выезд</a><a class="btn btn--light" href="mailto:info@force-point.ru">info@force-point.ru</a></div>
+      <p class="note">* Ориентир по похожим объектам. Сумму для вашего участка считаем после выезда.</p>
+    </div>
+    <div class="pop final-pop" data-lift>
+<div class="pop-shape"><img src="../img/pop/deck-plate-1200.webp?v=3b6c433b04" srcset="../img/pop/deck-plate-640.webp?v=cc0f6f01a0 640w, ../img/pop/deck-plate-1200.webp?v=3b6c433b04 1200w" sizes="(max-width: 860px) 92vw, 520px" width="1200" height="1200" alt="Терраса дома на дереве с перилами и лестницей, вид снизу" loading="lazy"></div>
+<img class="pop-cut" src="../img/pop/deck-cut-1200.webp?v=6a7a88f322" srcset="../img/pop/deck-cut-640.webp?v=ac1db8ce25 640w, ../img/pop/deck-cut-1200.webp?v=6a7a88f322 1200w" sizes="(max-width: 860px) 92vw, 520px" width="1200" height="1200" alt="" aria-hidden="true" loading="lazy">
+
+</div>
+  </section>
 </main>
 
+<footer class="wrap foot">
+  <div class="foot-row">
+    <span>ИП Чернов Иван Андреевич, ИНН 773575217294</span>
+    <span>Москва и область, выезжаем по России</span>
+    <nav aria-label="Разделы"><a href="#build">что строим</a><a href="#works">работы</a><a href="#path">как работаем</a><a href="#faq">вопросы</a></nav>
+  </div>
+</footer>
+
+
+<script src="../assets/vendor/swiper/swiper-bundle.min.js?v=e143328978" defer></script>
+<script src="../gallery.js?v=bdbad5f3b7" defer></script>
 
 </body>
 </html>
